@@ -9,12 +9,13 @@ interface LoginValues {
   password: string;
 }
 
-const LoginForm: React.FC = () => {
+const LoginForm: React.FC<{ onLogin: (token: string) => void }> = ({ onLogin }) => {
 
   const initialValues: LoginValues = {
     email: '',
     password: '',
   };
+  const [loading, setLoading] = useState(false);
 
   const validationSchema = Yup.object({
     email: Yup.string().required('Email is required'),
@@ -23,13 +24,19 @@ const LoginForm: React.FC = () => {
 
   const handleSubmit = async (values: LoginValues): Promise<void> => {
     try {
-      const response = (await axios.post('https://my-social-media-back.vercel.app/auth/login', values));
-      console.log('Login successful:', response.data);
-      // Aquí puedes redirigir al usuario a otra página, guardar tokens de acceso en el almacenamiento local, etc.
+      setLoading(true);
+      const response = await axios.post(
+        'https://cors-proxy-production-c13f.up.railway.app/https://my-social-media-back-production.up.railway.app/auth/login',
+        values
+      );
+      const accessToken = response.data.accessToken;
+
+      localStorage.setItem('token', accessToken);
+      onLogin(accessToken);
     } catch (error) {
-      console.log(error)
-      console.error('Login failed:', error);
-      // Aquí puedes manejar errores de inicio de sesión, como mostrar un mensaje al usuario
+      console.log('Login failed:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -58,9 +65,12 @@ const LoginForm: React.FC = () => {
             <ErrorMessage name="password" component="div" className="text-red-500 text-right"/>
           </div>
           <div className="flex justify-center my-4">
-            <button type="submit" className="text-blue-300 p-4 border-2 rounded-full w-1/3">
-              Accept
-            </button>
+            { loading 
+              ? <p>Loading...</p> 
+              : <button type="submit" className="text-blue-300 p-4 border-2 rounded-full w-1/3">
+                  Accept
+                </button>
+            }
           </div>
         </Form>
       </Formik>

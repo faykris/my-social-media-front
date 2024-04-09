@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.Login {
+    min-height: 50rem;
+}
+
+.Login div h1 {
+    font-size: 5vw;
+}
+
+.login-img {
+    background-size: 80rem;
+    background-position: 15% 20%;
+    background-repeat: no-repeat;
+    background-image: url("https://cdn4.vectorstock.com/i/1000x1000/74/88/connecting-people-social-network-concept-refer-vector-25537488.jpg");
+}

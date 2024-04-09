@@ -16,7 +16,7 @@ const App: React.FC = () =>{
   };
 
   return (
-    <div className="App">
+    <div className="App bg-blue-200">
       {token ? (
         <div>
           <p>¡Has iniciado sesión!</p>

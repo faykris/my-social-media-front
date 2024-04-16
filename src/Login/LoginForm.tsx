@@ -41,12 +41,12 @@ const LoginForm: React.FC<{ onLogin: (token: string) => void }> = ({ onLogin }) 
   };
 
   return (
-  <div className="Login w-full flex justify-around bg-blue-300 flex-wrap al">
-    <div className="w-1/2 bg-blue-700 flex justify-center flex-wrap px-10">
+  <div className="Login w-full flex justify-around bg-blue-300 lg:flex-wrap flex-wrap-reverse">
+    <div className="w-full lg:w-1/2 bg-blue-700 flex justify-center flex-wrap px-2 lg:px-10">
       <h1 className="text-cyan-100 mt-10">
         It's time to you connect to the world
       </h1>
-      <div className="h-80 w-full sm:w-2/3 lg:w-2/3 flex flex-wrap rounded-3xl bg-blue-100 p-5 m-3 shadow-xl">
+      <div className="h-80 w-full sm:w-2/3 lg:w-2/3 flex flex-wrap rounded-3xl bg-blue-100 p-5 m-3 shadow-xl max-w-md">
         <div className= "w-full">
           <h2 className="text-3xl font-bold text-center w-full text-blue-500 mb-10">
             Login
@@ -69,19 +69,21 @@ const LoginForm: React.FC<{ onLogin: (token: string) => void }> = ({ onLogin }) 
               <ErrorMessage name="password" component="div" className="text-red-500 text-right"/>
             </div>
             <div className="flex justify-center my-4">
-              { loading ? <p>Loading...</p> :
-                <button type="submit" className="text-blue-300 p-4 border-2 rounded-full w-1/3 border-blue-300 hover:bg-blue-700">
-                  Accept
-                </button>
-              }
+              <button type="submit"
+                      disabled={ loading }
+                      className="text-blue-300 p-4 border-2 rounded-full w-1/3 border-blue-300 hover:bg-blue-700 disabled:bg-gray-300">
+                { loading ? 'Loading': 'Continue'}
+              </button>
             </div>
           </Form>
         </Formik>
       </div>
+      <h2 className="text-cyan-100 w-full text-center mb-10">
+        <span className="font-bold text-cyan-300">My Social Media</span> is a good space for that. Join us!
+      </h2>
     </div>
 
-    <div className="w-1/2 bg-slate-200 login-img">
-
+    <div className="w-full lg:w-1/2 bg-slate-200 login-img">
     </div>
   </div>
   );

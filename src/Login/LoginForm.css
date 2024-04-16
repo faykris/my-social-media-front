@@ -16,3 +16,10 @@
     background-repeat: no-repeat;
     background-image: url("https://cdn4.vectorstock.com/i/1000x1000/74/88/connecting-people-social-network-concept-refer-vector-25537488.jpg");
 }
+
+@media screen and (max-width: 1023px) {
+    .login-img {
+        background-size: 125vw;
+        background-position: center;
+    }
+}

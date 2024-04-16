@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
-import LoginForm from './login/LoginForm';
+import LoginForm from './Login/LoginForm';
+import Home from './Home/Home';
 
 
 const App: React.FC = () =>{
@@ -18,12 +19,7 @@ const App: React.FC = () =>{
   return (
     <div className="App bg-blue-200">
       {token ? (
-        <div>
-          <p>¡Has iniciado sesión!</p>
-          <button onClick={handleLogout}>
-            Cerrar sesión
-          </button>
-        </div>
+        <Home onLogout={handleLogout} />
       ) : (
         <LoginForm onLogin={handleLogin} />
       )}

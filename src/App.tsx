@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import './App.css';
 import LoginForm from './Login/LoginForm';
 import Home from './Home/Home';
+import Modal from 'react-modal';
 
-
+Modal.setAppElement('#root');
 const App: React.FC = () =>{
   const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
 

@@ -10,12 +10,12 @@ interface LoginValues {
 }
 
 const LoginForm: React.FC<{ onLogin: (token: string) => void }> = ({ onLogin }) => {
+  const [loading, setLoading] = useState(false);
 
   const initialValues: LoginValues = {
     email: '',
     password: '',
   };
-  const [loading, setLoading] = useState(false);
 
   const validationSchema = Yup.object({
     email: Yup.string().required('Email is required'),
@@ -26,7 +26,7 @@ const LoginForm: React.FC<{ onLogin: (token: string) => void }> = ({ onLogin }) 
     try {
       setLoading(true);
       const response = await axios.post(
-        'https://cors-proxy-production-c13f.up.railway.app/https://my-social-media-back-production.up.railway.app/auth/login',
+        `${process.env.REACT_APP_API_URL}/auth/login`,
         values
       );
       const accessToken = response.data.accessToken;

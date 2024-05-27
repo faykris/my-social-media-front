@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Modal from 'react-modal';
 import axios from "axios";
 import ReactModal from "react-modal";
 import * as Yup from "yup";

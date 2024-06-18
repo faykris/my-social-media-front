@@ -3,6 +3,7 @@ import axios from "axios";
 import ReactModal from "react-modal";
 import * as Yup from "yup";
 import {ErrorMessage, Field, Form, Formik} from "formik";
+import './Home.css';
 
 interface postValues {
   title: string;
@@ -19,6 +20,23 @@ interface postObject {
   updatedAt: string,
   __v: number
 }
+
+const customStyles = {
+  overlay: {
+    backgroundColor: 'RGBA(0,0,0, .5)',
+  },
+  content: {
+    top: '25%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    width: '80%',
+    maxWidth: '30rem',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    borderRadius: '10px'
+  },
+};
 
 const Home: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
   const [posts, setPosts] = useState([]);
@@ -120,7 +138,7 @@ const Home: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
   return (
     <>
       <div className='flex justify-between bg-blue-500 p-2 align-baseline items-center'>
-        <h3 className='text-cyan-50 m-0' >My Social Media</h3>
+        <h3 className='text-cyan-50 m-0'>My Social Media</h3>
         <button onClick={onLogout} className='border-0 bg-blue-700 rounded-2xl text-cyan-100 px-3.5 py-1 hover:bg-blue-800'>
           Logout
         </button>
@@ -133,25 +151,25 @@ const Home: React.FC<{ onLogout: () => void }> = ({ onLogout }) => {
             className='border-0 bg-blue-700 rounded-2xl text-cyan-100 px-3.5 py-1 hover:bg-blue-800 ml-2'>
             New Post
           </button>
-          <ReactModal isOpen={isOpen}>
-            <p>Create Post</p>
+          <ReactModal isOpen={isOpen} style={customStyles} contentLabel="Example Modal">
+            <h2 className="text-center font-bold text-2xl mb-2.5">Create Post</h2>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
               onSubmit={addPost}
             >
               <Form className="w-full">
-                <div>
-                  <label htmlFor="title" className="text-blue-800">Title</label>
-                  <Field type="text" id="title" name="title" className="w-full h-10 rounded-full px-4" />
+                <div className="input">
+                  <label htmlFor="title" className="text-blue-800 font-bold">Title</label>
+                  <Field type="text" id="title" name="title" className="w-full h-10 rounded-xl px-4 field" />
                   <ErrorMessage name="title" component="div" className="text-red-500 text-right" />
                 </div>
-                <div>
-                  <label htmlFor="content" className="text-blue-800">Content</label>
-                  <Field type="text" id="content" name="content" className="w-full h-10 rounded-full px-4" />
+                <div className="input mb-15">
+                  <label htmlFor="content" className="text-blue-800 font-bold">Content</label>
+                  <Field as="textarea" id="content" name="content" className="w-full h-20 rounded-xl px-4 field" />
                   <ErrorMessage name="content" component="div" className="text-red-500 text-right"/>
                 </div>
-                <div className="flex justify-center my-4">
+                <div className="flex justify-center mt-14">
                   <button
                     onClick={closeModal}
                     className='border-0 bg-blue-700 rounded-2xl text-cyan-100 px-3.5 py-1 hover:bg-blue-800 ml-2'>
